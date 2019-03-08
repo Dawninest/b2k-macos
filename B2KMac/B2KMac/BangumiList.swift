@@ -33,7 +33,6 @@ class BangumiList: NSView {
     override init(frame: NSRect) {
         super.init(frame: frame)
         self.initListUI()
-        print("draw list")
     }
 
 
@@ -61,17 +60,12 @@ extension BangumiList {
     func initTopBar () {
         
         topBar.frame = NSRect.init(x: 0, y: bottom_H , width: width, height: top_H)
-        
-        topBar.wantsLayer = true
-        topBar.layer?.setNeedsDisplay()
-        topBar.layer?.backgroundColor = NSColor.clear.cgColor
-        
+        //segmentControl.cell?.isBordered = false
         segmentControl.selectedSegmentBezelColor = NSColor(calibratedRed:0.89, green:0.40, blue:0.55, alpha:1.00)
         segmentControl.frame = NSRect(x: 5, y: 0, width: 290, height: 30)
         segmentControl.segmentStyle = .roundRect
         segmentControl.segmentCount = 7  // 显示几个 segment
         /** 设置segment 每个 segment 的文字 */
-        
         
         segmentControl.setWidth(40, forSegment: 0)
         segmentControl.setWidth(40, forSegment: 1)
@@ -80,12 +74,12 @@ extension BangumiList {
         segmentControl.setWidth(40, forSegment: 4)
         segmentControl.setWidth(40, forSegment: 5)
         segmentControl.setWidth(40, forSegment: 6)
-       
         //添加监控事件
         segmentControl.target = self
         segmentControl.action = #selector(self.segmentControlChanged(segmentControl:))
         topBar.addSubview(segmentControl)
         
+       
         self.addSubview(topBar)
     }
     
@@ -200,6 +194,7 @@ extension BangumiList {
             bangumiCell.tapFunc(callBack: { (seasonId) in
                 let linkUrl = "https://www.bilibili.com/bangumi/play/ss\(seasonId)"
                 NSWorkspace.shared.open(NSURL.init(string: linkUrl)! as URL);
+//                NSStatusBar.system.h
             })
             newCellArr.append(bangumiCell)
             self.dailyList.addSubview(bangumiCell)
