@@ -14,7 +14,6 @@
 		DA5111E7222F56DF0068E2E4 /* BangumiList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5111E6222F56DF0068E2E4 /* BangumiList.swift */; };
 		DA5111E9222F5AB10068E2E4 /* BangumiAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5111E8222F5AB10068E2E4 /* BangumiAPI.swift */; };
 		DA5111EB222F99280068E2E4 /* BangumiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5111EA222F99280068E2E4 /* BangumiCell.swift */; };
-		DAF7D9BB2230C61E00CB87A0 /* ToolButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF7D9BA2230C61E00CB87A0 /* ToolButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +27,6 @@
 		DA5111E6222F56DF0068E2E4 /* BangumiList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BangumiList.swift; sourceTree = "<group>"; };
 		DA5111E8222F5AB10068E2E4 /* BangumiAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BangumiAPI.swift; sourceTree = "<group>"; };
 		DA5111EA222F99280068E2E4 /* BangumiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BangumiCell.swift; sourceTree = "<group>"; };
-		DAF7D9BA2230C61E00CB87A0 /* ToolButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +66,6 @@
 				DA5111DB222E6A0C0068E2E4 /* Info.plist */,
 				DA5111DC222E6A0C0068E2E4 /* B2KMac.entitlements */,
 				DA5111E6222F56DF0068E2E4 /* BangumiList.swift */,
-				DAF7D9BA2230C61E00CB87A0 /* ToolButton.swift */,
 				DA5111E8222F5AB10068E2E4 /* BangumiAPI.swift */,
 				DA5111EA222F99280068E2E4 /* BangumiCell.swift */,
 			);
@@ -150,7 +147,6 @@
 				DA5111EB222F99280068E2E4 /* BangumiCell.swift in Sources */,
 				DA5111D5222E6A0B0068E2E4 /* AppDelegate.swift in Sources */,
 				DA5111E7222F56DF0068E2E4 /* BangumiList.swift in Sources */,
-				DAF7D9BB2230C61E00CB87A0 /* ToolButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

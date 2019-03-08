@@ -29,16 +29,14 @@ class BangumiList: NSView {
     var cellArr = Array<Any>()
     
     let bangumiAPI = BangumiAPI()
-
-
     
     override init(frame: NSRect) {
         super.init(frame: frame)
         self.initListUI()
-        print("init")
+        print("draw list")
     }
-    
-    
+
+
     required init?(coder decoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -104,9 +102,12 @@ extension BangumiList {
         
         bottomBar.frame = NSRect.init(x: 0, y: 0, width: width, height: bottom_H)
         
-        let updateBtn = ToolButton.init(frame: NSRect.init(x: 5, y: 0, width: 30, height: 30))
-        updateBtn.btnImge.image = NSImage.init(named: "update")
-        updateBtn.buttonTap {self.updateData()}
+        let updateBtn = NSButton.init(frame: NSRect.init(x: 10, y: 5, width: 20, height: 20))
+        updateBtn.image = NSImage.init(named: "update")
+        updateBtn.imageScaling = .scaleProportionallyUpOrDown
+        updateBtn.isBordered = false
+        updateBtn.target = self
+        updateBtn.action = #selector(self.updateData)
         bottomBar.addSubview(updateBtn)
         
         weekBar.frame = NSRect.init(x: 40, y: 0, width: 220, height: 23)
@@ -120,20 +121,23 @@ extension BangumiList {
         bottomBar.addSubview(weekBar)
         
         
-        let exitBtn = ToolButton.init(frame: NSRect.init(x: 265, y: 0, width: 30, height: 30))
-        exitBtn.btnImge.image = NSImage.init(named: "exit")
-        exitBtn.buttonTap {self.exitApp()}
+        let exitBtn = NSButton.init(frame: NSRect.init(x: 270, y: 5, width: 20, height: 20))
+        exitBtn.image = NSImage.init(named: "exit")
+        exitBtn.imageScaling = .scaleProportionallyUpOrDown
+        exitBtn.isBordered = false
+        exitBtn.target = self
+        exitBtn.action = #selector(self.exitApp)
         bottomBar.addSubview(exitBtn)
         
         self.addSubview(bottomBar)
     }
     
-    func exitApp () {
+    @objc func exitApp () {
         // 退出
         NSApplication.shared.terminate(self)
     }
     
-    func updateData () {
+    @objc func updateData () {
         // 重载数据
         bangumiAPI.fetchData { bangumiData in
             self.initData(bangumiData)
