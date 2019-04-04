@@ -30,6 +30,8 @@ class BangumiList: NSView {
     
     let bangumiAPI = BangumiAPI()
     
+    var updateLine = "" // 保存商城刷新的 年-月-日 ,一天只拉取一次数据
+    
     override init(frame: NSRect) {
         super.init(frame: frame)
         self.initListUI()
@@ -38,6 +40,25 @@ class BangumiList: NSView {
 
     required init?(coder decoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func draw(_ dirtyRect: NSRect) {
+        super.draw(dirtyRect)
+        
+        let date = Date.init()
+        let chinese = Calendar.init(identifier: .gregorian)
+        let components = Set<Calendar.Component>([.month, .day])
+        let theComponents = chinese.dateComponents(components, from: date)
+        let mouth = theComponents.month!
+        let dayStr = theComponents.day!
+        let nowLine = "\(mouth)-\(dayStr)"
+        if (nowLine != updateLine) {
+            bangumiAPI.fetchData { bangumiData in
+                self.initData(bangumiData)
+            }
+        } else {
+            print("无需更新")
+        }
     }
     
 
@@ -96,14 +117,6 @@ extension BangumiList {
         
         bottomBar.frame = NSRect.init(x: 0, y: 0, width: width, height: bottom_H)
         
-        let updateBtn = NSButton.init(frame: NSRect.init(x: 10, y: 5, width: 20, height: 20))
-        updateBtn.image = NSImage.init(named: "update")
-        updateBtn.imageScaling = .scaleProportionallyUpOrDown
-        updateBtn.isBordered = false
-        updateBtn.target = self
-        updateBtn.action = #selector(self.updateData)
-        bottomBar.addSubview(updateBtn)
-        
         weekBar.frame = NSRect.init(x: 40, y: 0, width: 220, height: 23)
         weekBar.isEditable = false
         weekBar.isBordered = false
@@ -130,13 +143,6 @@ extension BangumiList {
         // 退出
         NSApplication.shared.terminate(self)
     }
-    
-    @objc func updateData () {
-        // 重载数据
-        bangumiAPI.fetchData { bangumiData in
-            self.initData(bangumiData)
-        }
-    }
 }
 
 
@@ -148,7 +154,16 @@ extension BangumiList {
             // 先用拿到的第一天数据
             self.chooseDaily(dayNum: 3)
             self.initTop(data)
+            self.setUpdateLine()
+            
         }
+    }
+    
+    func setUpdateLine () {
+        let data = self.bangumiData
+        let dailyData: Dictionary<String,Any> = data[3]
+        let date: String = dailyData["date"] as! String
+        updateLine = date
     }
     
     func chooseDaily (dayNum: Int) {
@@ -179,7 +194,7 @@ extension BangumiList {
         for (index,value) in seasons.enumerated() {
             let bangumiData = value
             let title: String = bangumiData["title"] as! String
-            let des: String = bangumiData["pub_index"] as! String
+            let des: String = (bangumiData["pub_index"] == nil ? bangumiData["delay_index"] : bangumiData["pub_index"]) as! String
             let time: String = bangumiData["pub_time"] as! String
             let cover: String = bangumiData["square_cover"] as! String
             let seasonId: Int = bangumiData["season_id"] as! Int
@@ -194,7 +209,6 @@ extension BangumiList {
             bangumiCell.tapFunc(callBack: { (seasonId) in
                 let linkUrl = "https://www.bilibili.com/bangumi/play/ss\(seasonId)"
                 NSWorkspace.shared.open(NSURL.init(string: linkUrl)! as URL);
-//                NSStatusBar.system.h
             })
             newCellArr.append(bangumiCell)
             self.dailyList.addSubview(bangumiCell)

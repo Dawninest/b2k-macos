@@ -20,9 +20,18 @@ class BangumiCell: NSView {
     
     
     var tapCallBack: tapBlock?
+    
+    override init(frame: NSRect) {
+        super.init(frame: frame)
+        self.initUI()
+    }
+    
+    
+    required init?(coder decoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
-    override func draw(_ dirtyRect: NSRect) {
-        super.draw(dirtyRect)
+    func initUI() {
         
         self.layer?.backgroundColor = NSColor.clear.cgColor
         
