@@ -3,7 +3,7 @@ Bilibili 追番macOS dock栏工具
 
 <img src="./mdSupport/00.jpg" width=375 height=658 />
 
-[点击下载](https://github.com/Dawninest/b2k-macos/releases/download/v0.0/B2K-v0.0.1.dmg) [macOS 可用,具体系统啥要求,我也不太清楚(摊手)]
+[点击下载](https://github.com/Dawninest/b2k-macos/releases/download/v0.0/B2K-v0.0.dmg) [macOS 可用,具体系统啥要求,我也不太清楚(摊手)]
 
 ------
 
